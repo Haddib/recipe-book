@@ -11,19 +11,26 @@ export class RecipeService {
 
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Schnitzel', 
-      "It's schnitzel... just schnitzel.", 
-      "https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG",
-      [
-        new Ingredient("Meat", 1),
-        new Ingredient("French Fry", 20)
-      ]
-    )
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Schnitzel', 
+  //     "It's schnitzel... just schnitzel.", 
+  //     "https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG",
+  //     [
+  //       new Ingredient("Meat", 1),
+  //       new Ingredient("French Fry", 20)
+  //     ]
+  //   )
+  // ];
+
+  private recipes: Recipe[] = [];
 
   constructor(private shoppingListService: ShoppingListService) { }
+
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes(){ return this.recipes.slice() };
 
